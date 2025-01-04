@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Welcome to Ecom API</h1>
+<p>This application allows you to manage products and news.</p>
+<div class="row">
+  </div>
+  {% for spider_name, status in scrapy_status.items() %}
+  <div class="col-md-4">
+    <a href="{{ url_for('api.crawl_spider', spider_name=spider_name) }}"
+      class="btn btn-primary btn-block">
+      Crawl {{ spider_name|capitalize }} Data
+    </a>
+    <p>
+      Status:
+      {% if status.log %}
+      <span class="text-warning">{{ status.log }}</span>
+      {% else %}
+      <span class="text-success">Idle</span>
+      {% endif %}
+    </p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

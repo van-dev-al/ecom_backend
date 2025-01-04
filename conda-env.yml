@@ -1,0 +1,22 @@
+name: flask-crawler
+
+channels:
+  - defaults
+  - conda-forge
+
+dependencies:
+  - python=3.12.6
+  - pip
+
+  - pip:
+      - flask
+      - flask-SQLAlchemy
+      - flask-Migrate
+      - flask-Session
+      - mysqlclient
+      - selenium
+      - requests
+      - beautifulsoup4
+      - scrapy
+      - pymysql
+      - Pandas

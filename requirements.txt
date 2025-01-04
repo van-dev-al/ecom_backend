@@ -1,0 +1,12 @@
+flask
+flask-SQLAlchemy
+flask-Migrate
+flask-Session
+mysqlclient
+scrapy_selenium
+selenium
+requests
+beautifulsoup4
+scrapy
+pymysql
+Pandas

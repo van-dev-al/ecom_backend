@@ -1,3 +1,6 @@
+# Chạy project
+puthon run.py
+
 # Xóa môi trường Conda cũ
 
 conda remove --name flask-crawler --all

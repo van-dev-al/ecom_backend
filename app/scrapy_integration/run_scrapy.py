@@ -35,9 +35,15 @@ def run_spider(spider_name):
             scrapy_status[spider_name]["log"] = f"Spider {spider_name} started..."
 
         settings = get_project_settings()
-        settings.set("FEED_URI", f"file:///{output_file.replace(os.sep, '/')}")
-        settings.set("FEED_FORMAT", "csv")
-        settings.set("FEED_EXPORT_ENCODING", "utf-8")
+        settings.set("REQUEST_FINGERPRINTER_IMPLEMENTATION", "2.7")
+        settings.set("FEEDS", {
+            output_file: {
+                "format": "csv",
+                "encoding": "utf-8",
+            }
+        })
+        # settings.set("FEED_URI", f"file:///{output_file.replace(os.sep, '/')}")
+        # settings.set("FEED_FORMAT", "csv")
         
         process = CrawlerProcess(settings)
         process.crawl(available_spiders[spider_name], output=output_file)

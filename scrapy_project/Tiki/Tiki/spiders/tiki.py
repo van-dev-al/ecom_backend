@@ -70,7 +70,7 @@ class TikiSpider(scrapy.Spider):
             'urlKey': url_key
         }
 
-        max_pages = 2
+        max_pages = 3
         for i in range(1, max_pages + 1):
             params['page'] = i
             response = requests.get(

@@ -35,7 +35,7 @@ class CellphonesSpider(scrapy.Spider):
         }
 
         # Duyệt qua các trang (page)
-        max_pages = 2
+        max_pages = 3
         for category in self.categories:
             for price_range in self.price_ranges:
                 for page in range(1, max_pages + 1):

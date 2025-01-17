@@ -1,3 +1,5 @@
+import random
+import time
 import scrapy, sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..')))
 import json, pandas as pd, requests
@@ -49,14 +51,15 @@ class DidongvietSpider(scrapy.Spider):
             slug_id = record['slug_id']
             self.logger.info(f"Lấy dữ liệu cho sản phẩm: {slug_id} - ID: {slug_category}")
             yield scrapy.Request(
-                url=f'https://didongviet.vn/_next/data/bEiiMuNUTgZt_A8bi3RGK/{slug_category}/{slug_id}.html.json?slug={slug_category}&id={slug_id}.html',
+                url=f'https://didongviet.vn/_next/data/RdNyWRhq3OlO4ScTFeYFD/{slug_category}/{slug_id}.html.json?slug={slug_category}&id={slug_id}.html',
                 headers=self.headers,
                 callback=self.parse_response,
                 meta={'category': slug_category}
             )
+            time.sleep(random.uniform(0.5, 2))
 
     def get_slug_ids(self, slug_ids):
-        max_pages = 2
+        max_pages = 3
         for category_id in self.categories:
             for page in range(1, max_pages + 1):
                 params = {
@@ -76,6 +79,7 @@ class DidongvietSpider(scrapy.Spider):
                         slug_id = record.get("redirect_url")
                         if slug_category and slug_id:
                             slug_ids.append({"slug_category": slug_category, "slug_id": slug_id})
+                    time.sleep(1)
                 else:
                     self.logger.error(f"Failed to fetch data from {url}, status code: {response.status_code}")
 
@@ -131,7 +135,7 @@ class DidongvietSpider(scrapy.Spider):
                 if url:
                     product_data["url"] = self.base_url + url
                 else:
-                     product_data["url"] = ""
+                    product_data["url"] = ""
 
                 images = product.get("images", [])
                 if images:
